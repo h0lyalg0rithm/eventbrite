@@ -16,8 +16,7 @@ describe Eventbrite do
     end
     it 'throws error on invalid token' do
       @eventbrite.access_token = 123123
-      expect{@eventbrite.validate_credential_type!}.to raise_error
+      expect{@eventbrite.validate_credential_type!}.to raise_error(Eventbrite::ConfigurationError)
     end
   end
-
 end
