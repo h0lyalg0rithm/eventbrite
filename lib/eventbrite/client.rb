@@ -1,8 +1,13 @@
+require 'eventbrite/utils'
+require 'eventbrite/events'
 module Eventbrite
   class Client
-    attr_accessor :access_token, :debug, :host
+    include Eventbrite::Utils
+    include Eventbrite::Events
+    attr_accessor :access_token, :debug
+    ENDPOINT = 'https://www.eventbriteapi.com'
+
     def initialize(options = {})
-      @host = "eventbrite.com"
       options.each do |key, value|
         send(:"#{key}=", value)
       end

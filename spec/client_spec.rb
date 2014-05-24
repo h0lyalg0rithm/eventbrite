@@ -1,22 +1,18 @@
 require 'spec_helper'
-describe Eventbrite do
+describe Eventbrite::Client do
   before do
-    @eventbrite = Eventbrite::Client.new do |config|
-      config.access_token = "adsadasdsadsa"
+    @client = Eventbrite::Client.new do |config|
+      config.access_token = "asdasdasdasdas"
     end
   end
-
-  describe '#initialization' do
-    it 'stores access_token' do
-      expect(@eventbrite.access_token).to eq "adsadasdsadsa"
+  describe "access_token" do
+    it "confirms invalid token" do
+      @client.access_token = nil
+      expect(@client.credentials?).to be false
     end
-    it 'throws error on nil token' do
-      @eventbrite.access_token = nil
-      expect(@eventbrite.credentials?).to eq false
-    end
-    it 'throws error on invalid token' do
-      @eventbrite.access_token = 123123
-      expect{@eventbrite.validate_credential_type!}.to raise_error(Eventbrite::ConfigurationError)
+    it "raises error when not String" do 
+      @client.access_token = 123123
+      expect{ @client.validate_credential_type! }.to raise_error(Eventbrite::ConfigurationError)
     end
   end
 end
