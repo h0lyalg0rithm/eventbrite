@@ -40,12 +40,12 @@ module Eventbrite
       JSON.parse request.body
     end
 
-    def get_user_own_events(id)
-      request "https://www.eventbriteapi.com/v3/users/#{id}/owned_events"
+    def get_user_owned_events(id)
+      request "https://www.eventbriteapi.com/v3/users/#{id}/owned_events/"
     end
 
     def get_user_orders(id)
-      request "https://www.eventbriteapi.com/v3/users/#{id}/orders"
+      request "https://www.eventbriteapi.com/v3/users/#{id}/orders/"
     end
   end
 end
