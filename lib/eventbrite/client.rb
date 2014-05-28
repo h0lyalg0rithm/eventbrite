@@ -47,5 +47,17 @@ module Eventbrite
     def get_user_orders(id)
       request "https://www.eventbriteapi.com/v3/users/#{id}/orders/"
     end
+    def get_user_owned_events_orders(id)
+      request "https://www.eventbriteapi.com/v3/users/#{id}/owned_event_orders/"
+    end
+    def get_user_owned_events_attendees(id)
+      request "https://www.eventbriteapi.com/v3/users/#{id}/owned_event_attendees/"
+    end
+    def get_user_venues(id)
+      request "https://www.eventbriteapi.com/v3/users/#{id}/venues/"
+    end
+    def get_user_organizers(id)
+      request "https://www.eventbriteapi.com/v3/users/#{id}/organizers/"
+    end
   end
 end

@@ -52,8 +52,8 @@ describe Eventbrite::Client do
       it 'returns hash' do
         expect(@response).to be_kind_of Hash
       end
-      it 'contains events array' do
-        expect(@response['events']).to be_kind_of Array
+      it 'contains orders array' do
+        expect(@response['orders']).to be_kind_of Array
       end
     end
     context 'owned event orders' do
@@ -63,8 +63,41 @@ describe Eventbrite::Client do
       it 'returns hash' do
         expect(@response).to be_kind_of Hash
       end
-      it 'contains events array' do
-        expect(@response['events']).to be_kind_of Array
+      it 'contains orders array' do
+        expect(@response['orders']).to be_kind_of Array
+      end
+    end
+    context 'owned event orders attendees' do
+      before do
+        @response = @client.get_user_owned_events_attendees(62663903135)
+      end
+      it 'returns hash' do
+        expect(@response).to be_kind_of Hash
+      end
+      it 'contains attendees array' do
+        expect(@response['attendees']).to be_kind_of Array
+      end
+    end
+    describe 'venues' do
+      before do
+        @response = @client.get_user_venues(62663903135)
+      end
+      it 'returns hash' do
+        expect(@response).to be_kind_of Hash
+      end
+      it 'contains venues array' do
+        expect(@response['venues']).to be_kind_of Array
+      end
+    end
+    describe 'organizers' do
+      before do
+        @response = @client.get_user_organizers(62663903135)
+      end
+      it 'returns hash' do
+        expect(@response).to be_kind_of Hash
+      end
+      it 'contains organizers array' do
+        expect(@response['organizers']).to be_kind_of Array
       end
     end
   end
