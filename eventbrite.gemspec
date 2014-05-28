@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = '0.0.1'
   s.date        = '2014-05-24'
   s.summary     = "Eventbrite gem for ruby!"
-  s.description = "A simple hello world gem"
+  s.description = "Ruby gem which works with both the eventbrite api versions( 1 & 3)"
   s.authors     = ["Suraj Shirvankar"]
   s.email       = 'surajshirvankar@gmail.com'
   s.files       = ["lib/eventbrite.rb"]
@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry-remote"
   s.add_development_dependency "pry-nav"
   s.add_development_dependency "growl"
-  s.add_development_dependency "unirest"
+  s.add_development_dependency "faraday"
 end
