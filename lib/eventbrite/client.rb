@@ -1,34 +1,38 @@
-require 'eventbrite/utils'
-require 'eventbrite/events'
+require 'faraday'
+require 'json'
 module Eventbrite
   class Client
-    include Eventbrite::Utils
-    include Eventbrite::Events
-    attr_accessor :access_token, :debug
-    ENDPOINT = 'https://www.eventbriteapi.com'
-
+    attr_accessor :token, :connection
     def initialize(options = {})
-      options.each do |key, value|
-        send(:"#{key}=", value)
+      options.each do |k,v|
+        send(:"#k=", v)
       end
       yield(self) if block_given?
-      validate_credential_type!
+      validate!
+      create_connection
     end
-    def credentials
-      {
-        :token => access_token
-      }
-    end
-
-    def credentials?
-      credentials.values.all?
-    end
-
-    def validate_credential_type!
-      credentials.each do |credential, value|
-        next if value.nil?
-        raise Eventbrite::ConfigurationError, "Invalid #{credential} specified: #{value.inspect} must be a string or symbol." unless value.is_a?(String) || value.is_a?(Symbol)
+    def validate!
+      if token.nil?
+        raise ArgumentError , "Please provide token"
+        return false
       end
+      true
+    end
+    def create_connection
+      @connection  = Faraday.new do |faraday|
+                      faraday.request  :url_encoded             
+                      faraday.response :logger                  
+                      faraday.adapter  Faraday.default_adapter  
+                    end
+    end
+    def user(user="me")
+      request "https://www.eventbriteapi.com/v3/users/#{user}/"
+    end
+    def request(path)
+      request = @connection.get(path) do |x|
+        x.headers = { 'Authorization' => 'Bearer MW7GAPGUIC2SEKESUS7X'}
+      end
+      JSON.parse request.body
     end
   end
 end
