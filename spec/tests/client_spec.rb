@@ -21,7 +21,7 @@ describe Eventbrite::Client do
   end
   describe 'creates a connection object' do
     it 'is valid' do
-      expect { @connection }.to be_kind_of Faraday::Connection
+      expect(@client.connection).to be_kind_of Faraday::Connection
     end
   end
 end
