@@ -34,5 +34,27 @@ describe Eventbrite::Client do
     it 'own details' do
       expect(@client.user).to be_kind_of Hash
     end
+    describe 'owned events' do
+      before do
+        @response = @client.get_user_own_events(62663903135)
+      end
+      it 'returns a Hash' do
+        expect(@response).to be_kind_of Hash
+      end
+      it 'contains events array' do
+        expect(@response['events']).to be_kind_of Array
+      end
+    end
+    describe 'orders' do
+      before do
+        @response = @client.get_user_orders(62663903135)
+      end
+      it 'returns hash' do
+        expect(@response).to be_kind_of Hash
+      end
+      it 'contains events array' do
+        expect(@response['events']).to be_kind_of Array
+      end
+    end
   end
 end
