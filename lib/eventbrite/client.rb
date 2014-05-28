@@ -1,5 +1,5 @@
 require 'faraday'
-
+require 'json'
 module Eventbrite
   class Client
     attr_accessor :token, :connection
@@ -24,6 +24,15 @@ module Eventbrite
                       faraday.response :logger                  
                       faraday.adapter  Faraday.default_adapter  
                     end
+    end
+    def user(user="me")
+      request "https://www.eventbriteapi.com/v3/users/#{user}/"
+    end
+    def request(path)
+      request = @connection.get(path) do |x|
+        x.headers = { 'Authorization' => 'Bearer MW7GAPGUIC2SEKESUS7X'}
+      end
+      JSON.parse request.body
     end
   end
 end

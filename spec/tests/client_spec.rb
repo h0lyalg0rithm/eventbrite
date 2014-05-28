@@ -28,6 +28,9 @@ describe Eventbrite::Client do
     it 'gets details' do
       expect(@client.user(1)).to be_kind_of Hash
     end
+    it 'returns correct details' do
+      expect(@client.user(62663903135)['id']).to eq "62663903135"
+    end
     it 'own details' do
       expect(@client.user).to be_kind_of Hash
     end
