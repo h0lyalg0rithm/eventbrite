@@ -24,4 +24,12 @@ describe Eventbrite::Client do
       expect(@client.connection).to be_kind_of Faraday::Connection
     end
   end
+  describe 'user' do
+    it 'gets details' do
+      expect(@client.user(1)).to be_kind_of Hash
+    end
+    it 'own details' do
+      expect(@client.user).to be_kind_of Hash
+    end
+  end
 end
