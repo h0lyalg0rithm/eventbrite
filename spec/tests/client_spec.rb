@@ -100,5 +100,10 @@ describe Eventbrite::Client do
         expect(@response['organizers']).to be_kind_of Array
       end
     end
+    describe 'orders' do
+      before do 
+        @response = @client.get_order()
+      end
+    end
   end
 end
